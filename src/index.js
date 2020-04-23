@@ -397,9 +397,9 @@ export default class Carousel extends React.Component {
       onMouseOver: this.handleMouseOver,
       onMouseOut: this.handleMouseOut,
       onMouseDown: e => {
-        if (e.preventDefault) {
-          e.preventDefault();
-        }
+        // if (e.preventDefault) {
+        //   e.preventDefault();
+        // }
 
         this.touchObject = {
           startX: e.clientX,
@@ -522,12 +522,14 @@ export default class Carousel extends React.Component {
   }
 
   handleClick(event) {
+    event.stopPropagation();
+
     if (this.clickDisabled === true) {
       if (event.metaKey || event.shiftKey || event.altKey || event.ctrlKey) {
         return;
       }
+
       event.preventDefault();
-      event.stopPropagation();
 
       if (event.nativeEvent) {
         event.nativeEvent.stopPropagation();
